@@ -7,17 +7,28 @@
 # Output: 3
 
 def most_frequent(numbers):
-    # Your code here
+    frequency_map = {}
+    for num in numbers:
+        frequency_map[num] = frequency_map.get(num, 0) + 1
+    most_frequent_element = None
+    max_frequency = 0
+
+    for num, frequency in frequency_map.items():
+        if frequency > max_frequency:
+            max_frequency = frequency
+            most_frequent_element = num
+    return most_frequent_element
+
     pass
 
 """
 Time and Space Analysis for problem 1:
-- Best-case:
-- Worst-case:
-- Average-case:
-- Space complexity:
-- Why this approach?
-- Could it be optimized?
+- Best-case: o(1)
+- Worst-case: o(n)
+- Average-case: o(n)
+- Space complexity: o(n)
+- Why this approach? only way i could think of
+- Could it be optimized? im sure it can be optimized
 """
 
 
@@ -29,17 +40,22 @@ Time and Space Analysis for problem 1:
 # Output: [4, 5, 6, 7]
 
 def remove_duplicates(nums):
-    # Your code here
-    pass
+    seen = set()
+    result = []
+    for item in nums:
+        if item not in seen:
+            result.append(item)
+            seen.add(item)
+    return result
 
 """
 Time and Space Analysis for problem 2:
-- Best-case:
-- Worst-case:
-- Average-case:
-- Space complexity:
-- Why this approach?
-- Could it be optimized?
+- Best-case: o(n)    
+- Worst-case: o(n)
+- Average-case: o(n)
+- Space complexity: o(n)
+- Why this approach? straightforward and efficient
+- Could it be optimized?    not that i can think of
 """
 
 
@@ -52,17 +68,25 @@ Time and Space Analysis for problem 2:
 # Output: [(1, 4), (2, 3)]
 
 def find_pairs(nums, target):
-    # Your code here
-    pass
+    seen = set()
+    pairs = []
+    for num in nums:
+        complement = target - num 
+        if complement in seen:
+            pairs.append(tuple(sorted((num, complement))))
+        seen.add(num)
+    return pairs
+
+    
 
 """
 Time and Space Analysis for problem 3:
-- Best-case:
-- Worst-case:
-- Average-case:
-- Space complexity:
-- Why this approach?
-- Could it be optimized?
+- Best-case: o(n)
+- Worst-case:   o(n)
+- Average-case: o(n)
+- Space complexity: o(n)
+- Why this approach? efficient and straightforward
+- Could it be optimized? yes it can im sure
 """
 
 
@@ -74,17 +98,32 @@ Time and Space Analysis for problem 3:
 # Example:
 # add_n_items(6) → should print when resizing happens.
 
-def add_n_items(n):
-    # Your code here
-    pass
+def add_n_items(n, initial_capacity=1):
+    my_list = [None] * initial_capacity
+    size = 0
+    capacity = initial_capacity
+
+    for i in range(n):
+        if size == capacity:
+            print(f"List is full. Resizing from capacity {capacity} to {2 * capacity}")
+            new_list = [None] * (2 * capacity)
+            for j in range(size):
+                new_list[j] = my_list[j]
+            my_list = new_list
+            capacity *= 2
+            my_list[size] = f"Item_{i}"
+            size += 1
+            print(f"Added Item_{i}, size: {size}, capacity: {capacity}")
+    
+   
 
 """
-Time and Space Analysis for problem 4:
-- When do resizes happen?
-- What is the worst-case for a single append?
-- What is the amortized time per append overall?
-- Space complexity:
-- Why does doubling reduce the cost overall?
+Time and Space Analysis for problem 4: 
+- When do resizes happen? when size == capacity
+- What is the worst-case for a single append? o(n) when n is the number of elements in the list
+- What is the amortized time per append overall? o(1)
+- Space complexity: o(n)
+- Why does doubling reduce the cost overall?because it makes resizing less frequent
 """
 
 
@@ -98,15 +137,20 @@ Time and Space Analysis for problem 4:
 # Because: [1, 1+2, 1+2+3, 1+2+3+4]
 
 def running_total(nums):
-    # Your code here
-    pass
+    running_sum = 0
+    running_totals_list = []
+    for num in nums:
+        running_sum += num
+        running_totals_list.append(running_sum)
+    return running_totals_list
+    pas
 
 """
 Time and Space Analysis for problem 5:
-- Best-case:
-- Worst-case:
-- Average-case:
-- Space complexity:
-- Why this approach?
-- Could it be optimized?
+- Best-case: o(n)
+- Worst-case:   o(n)
+- Average-case: o(n)
+- Space complexity: o(n)
+- Why this approach? straightforward and efficient
+- Could it be optimized? not that i can think of for a single pass solution
 """
